@@ -32,20 +32,23 @@ map.units[5][5] = monster
 
 
 
-function map.getTile(xVal, yVal) 
-  return map.tile[xVal][yVal]
+function map.getTile(yVal, xVal) 
+  return map.tile[yVal][xVal]
 end
-function map.getUnit(xVal, yVal)
-  return map.tile[xVal][yVal]
+function map.getUnit(yVal, xVal)
+  return map.tile[yVal][xVal]
 end
-function map.setUnit(xVal, yVal, unit)
-  map.Units[xVal][yVal]
+function map.setUnit(yVal, xVal, unit)
+  map.Units[yVal][xVal]
 end
-function map.setTile(xVal, Yval, tile)
-  map.Tiles[xVal][Yval]
+function map.setTile(yVal, xVal, tile)
+  map.Tiles[yVal][xVal]
 end
-function moveUnit(xOld, yOld, xNew, yNew, unit)
-  map.Units[xOld][yOld] = {}
-  map.Units[xNew][yNew] = unit
+function moveUnit(dy, dx, unit)
+  
+  map.Units[unit.y][unit.x] = {}
+  map.Units[unit.y+dy][unit.x+dx] = unit
+  unit.move(yNew - yOld, xNew - xOld)
+  
 end
 
