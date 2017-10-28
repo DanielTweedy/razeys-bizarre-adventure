@@ -29,16 +29,3 @@ function unit.move(character, dx, dy)
         character.stamina = character.stamina - totalDistance
     end
 end
-
---[[function unit.attack(character, dx, dy)
-    if(stamina > 0) then
-        local x = character.x
-        local y = character.y
-        local unitFighting = map.getUnit(y + dy, x + dx)
-        unit.fight(character, unitFighting)
-    end
-end]]--
-
-function unit.fight(attacker, defender)
-    
-end

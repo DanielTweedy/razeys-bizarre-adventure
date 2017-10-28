@@ -34,19 +34,19 @@ function map.getUnit(yVal, xVal)
   return map.tile[yVal][xVal]
 end
 
-function map.setUnit(yVal, xVal, unit)
-  map.Units[yVal][xVal] = unit
+function map.setUnit(yVal, xVal, cunit)
+  map.Units[yVal][xVal] = cunit
 end
 
 function map.setTile(yVal, xVal, tile)
   map.Tiles[yVal][xVal] = tile
 end
 
-function map.moveUnit(dy, dx, unit)
+function map.moveUnit(dy, dx, cunit)
   
-  map.Units[unit.y][unit.x] = {}
-  map.Units[unit.y+dy][unit.x+dx] = unit
-  unit.move(yNew - yOld, xNew - xOld)
+  map.Units[cunit.y][cunit.x] = {}
+  map.Units[cunit.y+dy][cunit.x+dx] = cunit
+  unit.move(yNew - yOld, xNew - xOld, cunit)
   
 end
 
