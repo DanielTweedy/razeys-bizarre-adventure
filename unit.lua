@@ -1,5 +1,5 @@
-require("player")
-require("map")
+--require("player")
+--require("protoMap")
 
 local abs = math.abs
 
@@ -17,7 +17,7 @@ razey.minRange = 1 -- number of spaces away a razey can attack
 razey.maxRange = 2 -- maximum reach of razey's weapon
 
 razey.stamina = 4
-razey.contoller = player
+--razey.contoller = player
 
 unit = {}
 
@@ -30,14 +30,14 @@ function unit.move(character, dx, dy)
     end
 end
 
-function unit.attack(character, dx, dy)
+--[[function unit.attack(character, dx, dy)
     if(stamina > 0) then
         local x = character.x
         local y = character.y
         local unitFighting = map.getUnit(y + dy, x + dx)
         unit.fight(character, unitFighting)
     end
-end
+end]]--
 
 function unit.fight(attacker, defender)
     
