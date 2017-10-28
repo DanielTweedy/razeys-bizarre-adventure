@@ -7,6 +7,10 @@ tile.staminaCost = {} -- cost  of moving through tiles
 
 local TILE_SIZE = 32 -- 32x32 tiles
 
+function tile.draw(tileType, y, x)
+   love.graphics.draw(tileType.sprite, TILE_SIZE * x, TILE_SIZE * y) 
+end
+
 -- Different tile types
 field = {}
 forest = {}
@@ -14,41 +18,29 @@ hill = {}
 cave = {}
 mountain = {}
 
--- Loads all the different tile types
---[[function tile.load()
-    field.load()
-    forest.load()
-    hill.load()
-    cave.load()
-    mountain.load()
-end]]--
+local TILE_PATH = "Assets/tilesets/"
 
---function field.load()
-    field.defenseBonus = 0
-    field.avoidBonus = 0
-    field.staminaCost = 0
---end
+field.defenseBonus = 0
+field.avoidBonus = 0
+field.staminaCost = 0
+field.sprite = love.graphics.newImage(TILE_PATH .. "tile_land_0.png")
 
---function forest.load()
-    forest.defenseBonus = 0
-    forest.avoidBonus = 5
-    forest.staminaCost = 1
---end
+forest.defenseBonus = 0
+forest.avoidBonus = 5
+forest.staminaCost = 1
+forest.sprite = love.graphics.newImage(TILE_PATH .. "tile_tree_0.png")
 
---function hill.load()
-    hill.defenseBonus = 1
-    hill.avoidBonus = 0
-    hill.staminaCost = 1
---end
+hill.defenseBonus = 1
+hill.avoidBonus = 0
+hill.staminaCost = 1
+hill.sprite = love.graphics.newImage(TILE_PATH .. "tile_hill_0.png")
 
---function cave.load()
-    cave.defenseBonus = 0
-    cave.avoidBonus = 0
-    cave.staminaCost = 0
---end
+cave.defenseBonus = 0
+cave.avoidBonus = 0
+cave.staminaCost = 0
+cave.sprite = love.graphics.newImage(TILE_PATH .. "tile_cave_00.png")
 
---function mountain.load()
-    mountain.defenseBonus = 2
-    mountain.avoidBonus = 10
-    mountain.staminaCost = 10
---end
+mountain.defenseBonus = 2
+mountain.avoidBonus = 10
+mountain.staminaCost = 10
+mountain.sprite = love.graphics.newImage(TILE_PATH .. "tile_land_2.png")
