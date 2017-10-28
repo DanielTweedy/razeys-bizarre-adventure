@@ -12,28 +12,31 @@ function player.new(o)
   return o
 end
 
-function player.selectUnit(x, y) 
-    if map.Units[x][y] == nil then
+function player.selectUnit(y, x) 
+    if map.getUnit(t, x) == nil then
       --insert menu functionality here.
     end
       else
-        player.selectedUnit = map.Units[x][y]
+        player.selectedUnit = map.getUnit(y, x)
       end
 end
   
-function player.moveUnit(x, y) 
+function player.moveUnit(y, x) 
     if player.selectedUnit ~= nil then
         x = x-selectedUnit.x
         y = y-selectedUnit.y
-        unit.move(x, y)
+        map.moveUnit(y, x, selectedUnit)
     end
     else 
-        self.selectUnit(x, y)
+        self.selectUnit(y, x)
     end
 end
 
-function player.attackUnit(x, y)
-    if map.getUnit(x, y) ~= nil then
-    
+function player.attackUnit(y, x)
+    if math.abs(dx) + math.abs(dy) >= selectedUnit.minRange and math.abs(dx) + math.abs(dy) <= maxRange then
+      map.getUnit(y, x).health = map.getUnit(y, x).health - selectedUnit.strength + map.getUnit(y, x).defense
+      if map.getUnit(y, x).stamina >= 1 then
+        selectedUnit.health = selectedUnit.health - map.getUnit(y, x) + selectedUnit.defense
+      end
   end
 end
