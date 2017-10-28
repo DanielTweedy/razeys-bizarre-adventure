@@ -17,7 +17,9 @@ function love.load()
 end
 
 function  love.draw()
-
+    tile.draw(field, 0 , 0)
+    tile.draw(forest, 0, 1)
+    tile.draw(hill, 0, 2)
 end
 
 function love.update(dt)
