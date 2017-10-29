@@ -9,7 +9,7 @@ require("protoMap")
 require("cursor")
 require("player")
 require("ui")
-
+require("enemy")
 local CURSOR_MOVE = 1
 local UNITS_MOVE = 2
 local AI_TURN = 3
@@ -35,6 +35,7 @@ end
 function love.update(dt)
     if(gameState == AI_TURN) then
         -- TODO
+		enemy.ai()
     end
 
     --map.update(dt)
@@ -61,6 +62,7 @@ function love.keypressed(key)
         -- End turn
         elseif key == "e" then
             gameState = AI_TURN
+			
         end
     end
 end
