@@ -53,7 +53,7 @@ function map.moveUnit(dy, dx, cunit)
   
   map.Units[cunit.y][cunit.x] = {}
   map.Units[cunit.y+dy][cunit.x+dx] = cunit
-  unit.move(yNew - yOld, xNew - xOld, cunit)
+  unit.move(dy, dx, cunit)
   
 end
 
