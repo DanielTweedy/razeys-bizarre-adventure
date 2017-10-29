@@ -44,6 +44,8 @@ function enemy.moveUnit(y, x)
 		else
 			x = x-enemy.selectedUnit.x
 			y = y-enemy.selectedUnit.y
+            print(x .. " " .. y)
+            print(enemy.selectedUnit == nil)
 			map.moveUnit(y, x, enemy.selectedUnit)
             enemy.selectedUnit = nil
 		end

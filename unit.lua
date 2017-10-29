@@ -52,7 +52,7 @@ archer.maxRange = 3 -- maximum reach of razey's weapon
 
 archer.stamina = 4
 archer.player = true
-archer.sprite = love.graphics.newImage(ASSET_PATH .. "Archer.png")
+archer.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Archer00.png")
 
 swordsman = {}
 swordsman.x = 3 -- board razeys
@@ -69,7 +69,7 @@ swordsman.maxRange = 1 -- maximum reach of weapon
 
 swordsman.stamina = 4
 swordsman.player = true
-swordsman.sprite = love.graphics.newImage(ASSET_PATH .. "Swordman.png")
+swordsman.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Swordman00.png")
 
 
 m1 = {}

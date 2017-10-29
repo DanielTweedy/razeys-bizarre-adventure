@@ -66,6 +66,8 @@ function map.setTile(yVal, xVal, tile)
 end
 
 function map.moveUnit(dy, dx, cunit)
+    print(cunit == nil)
+    print(unit.move == nil)
   unit.move(cunit, dx, dy)
 end
 
