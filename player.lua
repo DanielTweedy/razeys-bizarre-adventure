@@ -42,7 +42,7 @@ function player.attackUnit(y, x)
     local defenderTile = map.getTile(y,x)
     local defender = map.getUnit(y,x)
     
-  if defender ~= nil and player.attackerUnit ~= nil then
+  if defender ~= nil and attacker ~= nil then
     local dx = x - attacker.x
     local dy = y - attacker.y
     local dist = math.abs(dx) + math.abs(dy)
