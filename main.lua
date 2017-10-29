@@ -38,7 +38,16 @@ function love.keypressed(key)
         elseif key == "right" then
             cursor.move(1, 0)
         elseif key == "return" or key == "kpenter" then
-            print(map.getUnit(cursor.y, cursor.x))
+            tileSelect()
+        end
+    end
+end
+
+function tileSelect()
+    if(gameState == MOVE_CURSOR) then
+        local unit = getUnit(cursor.y, cursor.x)
+        if unit ~= nil then
+            print(unit.x)
         end
     end
 end
