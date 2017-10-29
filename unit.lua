@@ -15,7 +15,7 @@ razey.avoid = 15 -- how easy to hit razey
 razey.minRange = 1 -- number of spaces away a razey can attack
 razey.maxRange = 2 -- maximum reach of razey's weapon
 
-razey.stamina = 4
+razey.stamina = 100
 razey.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 cavalryman = {}
