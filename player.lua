@@ -70,17 +70,49 @@ function fight(attacker, defender, attackTile, defendTile)
 end
 
 function player.drawRange()
-	for y=0, player.selectedUnit.stamina do
-		for x=0, player.selectedUnit.stamina-y do
+	for y=0, player.selectedUnit.stamina+player.selectedUnit.maxRange do
+		for x=0, player.selectedUnit.stamina-y+player.selectedUnit.maxRange do
             if (player.selectedUnit.x+x < 11 and player.selectedUnit.y+y < 11) then
-			love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
-            end if (player.selectedUnit.x+x < 11 and player.selectedUnit.y-y >= 1) then
-			love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
-            end if (player.selectedUnit.x-x >= 1 and player.selectedUnit.y+y < 11) then
-			love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
-            end if (player.selectedUnit.x-x >= 1 and player.selectedUnit.y-y >= 1) then
-			love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
-            end
+              
+              if (x > player.selectedUnit.stamina-y-player.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else
+              love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+			
+          end if (player.selectedUnit.x+x < 11 and player.selectedUnit.y-y >= 1) then
+            
+            if (x > player.selectedUnit.stamina-y-player.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else
+              love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+      
+          end if (player.selectedUnit.x-x >= 1 and player.selectedUnit.y+y < 11) then
+            
+            if (x > player.selectedUnit.stamina-y-player.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else 
+              love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+      
+          end if (player.selectedUnit.x-x >= 1 and player.selectedUnit.y-y >= 1) then
+            
+            if(x > player.selectedUnit.stamina-y-player.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else
+              love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+      
+          end
 		end
 	end
 end
