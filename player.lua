@@ -13,9 +13,8 @@ function player.new(o)
 end
 
 function player.selectUnit(y, x) 
-    if map.getUnit(t, x) == nil then
+    if map.getUnit(y, x) == nil then
       --insert menu functionality here.
-    end
       else
         player.selectedUnit = map.getUnit(y, x)
       end
@@ -26,7 +25,6 @@ function player.moveUnit(y, x)
         x = x-selectedUnit.x
         y = y-selectedUnit.y
         map.moveUnit(y, x, selectedUnit)
-    end
     else 
         self.selectUnit(y, x)
     end

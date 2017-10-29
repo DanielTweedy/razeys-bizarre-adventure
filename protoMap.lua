@@ -42,7 +42,7 @@ function map.getTile(yVal, xVal)
 end
 
 function map.getUnit(yVal, xVal)
-  return map.tile[yVal][xVal]
+  return map.Units[yVal][xVal]
 end
 
 function map.setUnit(yVal, xVal, cunit)

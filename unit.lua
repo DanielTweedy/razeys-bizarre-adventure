@@ -1,5 +1,3 @@
---require("player")
---require("protoMap")
 
 local abs = math.abs
 
