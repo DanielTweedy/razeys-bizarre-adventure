@@ -66,10 +66,15 @@ end
 function player.drawRange()
 	for y=0, player.selectedUnit.stamina do
 		for x=0, player.selectedUnit.stamina-y do
+            if (player.selectedUnit.x+x < 11 and player.selectedUnit.y+y < 11) then
 			love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+            end if (player.selectedUnit.x+x < 11 and player.selectedUnit.y-y >= 1) then
 			love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+            end if (player.selectedUnit.x-x >= 1 and player.selectedUnit.y+y < 11) then
 			love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+            end if (player.selectedUnit.x-x >= 1 and player.selectedUnit.y-y >= 1) then
 			love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+            end
 		end
 	end
 end

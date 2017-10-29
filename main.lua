@@ -64,11 +64,9 @@ function tileSelect()
         if (map.getUnit(cursor.y, cursor.x).player == true) then
             player.selectUnit(cursor.y, cursor.x)
         else 
-        --gameState = CURSOR_MOVE
         player.attackUnit(cursor.y, cursor.x)
           end
       else 
-        --gameState = CURSOR_MOVE
         player.moveUnit(cursor.y, cursor.x)
         end
     end
