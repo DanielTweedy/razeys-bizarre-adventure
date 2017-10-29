@@ -45,11 +45,16 @@ function love.keypressed(key)
 end
 
 function tileSelect()
-    if(gameState == CURSOR_MOVE) then
+    if(map.getUnit(cursor.y,cursor.x) ~= nil and gameState == CURSOR_MOVE) then
         gameState = UNITS_MOVE
         player.selectUnit(cursor.y, cursor.x)
     elseif gameState == UNITS_MOVE then
+      if (map.getUnit(cursor.y,cursor.x) ~= nil) then
+        gameState = CURSOR_MOVE
+        player.attackUnit(cursor.y, cursor.x)
+      else 
         gameState = CURSOR_MOVE
         player.moveUnit(cursor.y, cursor.x)
+        end
     end
 end

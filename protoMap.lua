@@ -29,7 +29,7 @@ map.Units[6] = m2
 map.Units[7] = leader
 
 function map.getTile(yVal, xVal) 
-  return map.tile[yVal][xVal]
+  return map.Tiles[yVal][xVal]
 end
 
 function map.getUnit(yVal, xVal)
