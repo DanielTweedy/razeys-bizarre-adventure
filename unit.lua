@@ -117,8 +117,8 @@ leader.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_MLeader0.png")
 unit = {}
 
 function unit.move(character, dx, dy)
-    local totalDistance = abs(dx) + abs(dy)
-    if(totalDistance <= stamina) then
+    local totalDistance = math.abs(dx) + math.abs(dy)
+    if(totalDistance <= character.stamina) then
         character.x = character.x + dx
         character.y = character.y + dy
         character.stamina = character.stamina - totalDistance

@@ -36,9 +36,10 @@ function map.getUnit(yVal, xVal)
   local i
   for i=1, #map.Units do
     if yVal == map.Units[i].y and xVal == map.Units[i].x then
-      return map.Units[i];
+      return map.Units[i]
     end
   end
+    return nil
 end
 
 function map.setUnit(yVal, xVal, cunit)
@@ -53,7 +54,7 @@ function map.moveUnit(dy, dx, cunit)
   
   map.Units[cunit.y][cunit.x] = {}
   map.Units[cunit.y+dy][cunit.x+dx] = cunit
-  unit.move(dy, dx, cunit)
+  unit.move(cunit, dx, dy)
   
 end
 

@@ -39,6 +39,7 @@ function love.keypressed(key)
         elseif key == "right" then
             cursor.move(1, 0)
         elseif key == "return" or key == "kpenter" then
+          
             tileSelect()
         end
     end
@@ -46,9 +47,9 @@ end
 
 function tileSelect()
     if(gameState == CURSOR_MOVE) then
-        gameState = UNIT_MOVE
+        gameState = UNITS_MOVE
         player.selectUnit(cursor.y, cursor.x)
-    elseif gameState == UNIT_MOVE then
+    elseif gameState == UNITS_MOVE then
         gameState = CURSOR_MOVE
         player.moveUnit(cursor.y, cursor.x)
     end
