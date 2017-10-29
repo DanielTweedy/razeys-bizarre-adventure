@@ -14,3 +14,12 @@ function ui.drawUnitInfo(unit)
 	love.graphics.print("Defense: " .. tostring(unit.defense), 200, 496)
 	love.graphics.print("Avoid: " .. tostring(unit.avoid), 200, 528)
 end
+
+function ui.drawControls()
+    love.graphics.setNewFont(15)
+    love.graphics.print("Move cursor: Arrow Keys", 400, 32)
+    love.graphics.print("Select Unit: Enter or Space", 400, 52)
+    love.graphics.print("Deselect Unit: c", 400, 72)
+    love.graphics.print("Close: esc", 400, 92)
+    
+end

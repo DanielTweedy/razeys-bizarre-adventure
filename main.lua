@@ -24,6 +24,7 @@ function love.draw()
     map.draw()
     cursor.draw()
 	ui.drawTileInfo(map.getTile(cursor.y, cursor.x))
+    ui.drawControls()
 	if(player.selectedUnit ~= nil) then
 		ui.drawUnitInfo(player.selectedUnit)
 		player.drawRange()
