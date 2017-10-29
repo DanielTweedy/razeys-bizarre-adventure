@@ -73,12 +73,8 @@ function map.draw()
     for y=1, #map.Under do
         for x=1, #map.Under[y] do
             tile.draw(map.Under[y][x], y, x)
-        end
-    end
-    for y=1, #map.Upper do
-        for x=1, #map.Upper[y] do
 			if(map.Upper[y][x] ~= nil) then
-				tile.draw(map.Upper[y][x], y, x)
+	    		tile.draw(map.Upper[y][x], y, x)
 			end
         end
     end
