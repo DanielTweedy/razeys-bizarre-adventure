@@ -5,8 +5,8 @@ local abs = math.abs
 ASSET_PATH = "Assets/characters/"
 
 razey = {}
-razey.x = 2 -- board razeys
-razey.y = 4 -- board razeys
+razey.x = 4 -- board razeys
+razey.y = 2 -- board razeys
 
 razey.health = 20 -- base health points
 razey.strength = 7 -- base damage  done
@@ -21,8 +21,8 @@ razey.stamina = 4
 razey.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 cavalryman = {}
-cavalryman.x = 5 -- board razeys
-cavalryman.y = 3 -- board razeys
+cavalryman.x = 3 -- board razeys
+cavalryman.y = 5 -- board razeys
 
 cavalryman.health = 20 -- base health points
 cavalryman.strength = 7 -- base damage  done
@@ -129,5 +129,5 @@ end
 
 function unit.draw(character)
     local TILE_SIZE = 32
-    love.graphics.draw(character.sprite, TILE_SIZE * character.y, TILE_SIZE * character.x)
+    love.graphics.draw(character.sprite, TILE_SIZE * character.x, TILE_SIZE * character.y)
 end
