@@ -13,9 +13,10 @@ function player.new(o)
 end
 
 function player.selectUnit(y, x) 
-    if map.getUnit(t, x) == nil then
-        --insert menu functionality here
-    else
+<<<<<<< HEAD
+    if map.getUnit(y, x) == nil then
+      --insert menu functionality here.
+      else
         player.selectedUnit = map.getUnit(y, x)
     end
 end
