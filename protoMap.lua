@@ -47,6 +47,11 @@ function map.getTile(yVal, xVal)
   end
 end
 
+function map.refreshStamina()
+	for i = 1, #map.Units do
+		map.Units[i].stamina = map.Units[i].maxStamina
+	end
+end
 function map.getUnit(yVal, xVal)
   local i
   for i=1, #map.Units do

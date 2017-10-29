@@ -36,6 +36,8 @@ function love.update(dt)
     if(gameState == AI_TURN) then
         -- TODO
 		enemy.ai()
+		gameState = CURSOR_MOVE
+		map.refreshStamina()
     end
 end
 

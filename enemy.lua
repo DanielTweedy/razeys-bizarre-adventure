@@ -18,9 +18,9 @@ function enemy.ai()
 		if(map.Units[i].player == false) then
 			if(unit~=nil) then
 				enemy.selectUnit(map.Units[i])
-				love.timer.sleep(TIME_WAIT)
+				--love.timer.sleep(TIME_WAIT)
 				enemy.findClosest()
-				love.timer.sleep(TIME_WAIT)
+				--love.timer.sleep(TIME_WAIT)
 			end
 		end
 	end
@@ -77,7 +77,7 @@ function enemy.attackUnit(y, x)
   end 
 end
 function enemy.findClosest()
-	unit = enemy.selectedUnit
+	local unit = enemy.selectedUnit
 	if unit.stamina == 0 then
 		return
 	end
@@ -115,7 +115,7 @@ function enemy.findClosest()
 			enemy.moveUnit(closest.y-stamina, unit.x)
 		end
 	end
-	love.timer.sleep(TIME_WAIT)
+	--love.timer.sleep(TIME_WAIT)
 	enemy.attackUnit(closest.y,closest.x)
 end			
 function enemy.drawRange()
