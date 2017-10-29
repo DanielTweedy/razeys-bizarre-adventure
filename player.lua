@@ -39,29 +39,35 @@ end
 
 function player.attackUnit(y, x)
     local attacker = player.selectedUnit
-    local defenderTile = map.getTile(y,x)
     local defender = map.getUnit(y,x)
     
-  if defender ~= nil and attacker ~= nil then
-    local dx = x - attacker.x
-    local dy = y - attacker.y
-    local dist = math.abs(dx) + math.abs(dy)
+    if defender ~= nil and attacker ~= nil then
+        local attackTile = map.getTile(attacker.y,attacker.x)
+        local defendTile = map.getTile(y,x)
+        local dx = x - attacker.x
+        local dy = y - attacker.y
+        local dist = math.abs(dx) + math.abs(dy)
     
-    if unit.inRange(attacker, dist) and unit.canFight(attacker) then
-        attacker.stamina = attacker.stamina-1
-        if math.random(100) < unit.hitChance(defender.avoid,defenderTile.avoidBonus) then
-            local dmg = attacker.strength - defender.defense - defenderTile.defenseBonus
-            if (dmg > 0) then defender.health = defender.health - dmg; end
-        if unit.canFight(defender) and math.random(100) < unit.hitChance(attacker.avoid,map.getTile(attacker.y, attacker.x).avoidBonus) then
-            temp = attacker.health - defender.strength + attacker.defense + map.getTile(attacker.y, attacker.x).avoidBonus
-               if (temp < 0) then
-                else
-                attacker.health = temp;
-              end
-            end
+        if unit.inRange(attacker, dist) and unit.canFight(attacker) then
+            fight(attacker, defender, attackTile, defendTile)
         end
-      end
-  end 
+        -- Counter attack
+        if unit.canFight(defender) and unit.inRange(defender, dist) then
+            fight(defender, attacker, defendTile, attackTile)
+        end
+    end
+end
+
+function fight(attacker, defender, attackTile, defendTile)
+    attacker.stamina = attacker.stamina-1
+    local attackerHit = math.random(100) < unit.hitChance(defender.avoid,defendTile.avoidBonus)
+
+    if attackerHit then
+        local dmg = attacker.strength - defender.defense - defendTile.defenseBonus
+        if (dmg > 0) then
+            defender.health = defender.health - dmg
+        end
+    end
 end
 
 function player.drawRange()
