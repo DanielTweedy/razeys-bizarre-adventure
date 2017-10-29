@@ -51,11 +51,7 @@ function map.setTile(yVal, xVal, tile)
 end
 
 function map.moveUnit(dy, dx, cunit)
-  
-  map.Units[cunit.y][cunit.x] = {}
-  map.Units[cunit.y+dy][cunit.x+dx] = cunit
   unit.move(cunit, dx, dy)
-  
 end
 
 function map.draw()

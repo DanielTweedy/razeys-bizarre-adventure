@@ -39,7 +39,6 @@ function love.keypressed(key)
         elseif key == "right" then
             cursor.move(1, 0)
         elseif key == "return" or key == "kpenter" then
-          
             tileSelect()
         end
     end
