@@ -55,7 +55,7 @@ archer.maxRange = 3 -- maximum reach of razey's weapon
 archer.stamina = 4
 archer.maxStamina = 4
 archer.player = true
-archer.sprite = love.graphics.newImage(ASSET_PATH .. "Archer.png")
+archer.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Archer00.png")
 
 swordsman = {}
 swordsman.x = 3 -- board razeys
@@ -73,7 +73,7 @@ swordsman.maxRange = 1 -- maximum reach of weapon
 swordsman.stamina = 4
 swordsman.maxStamina = 4
 swordsman.player = true
-swordsman.sprite = love.graphics.newImage(ASSET_PATH .. "Swordman.png")
+swordsman.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Swordman00.png")
 
 
 m1 = {}
@@ -165,4 +165,8 @@ end
 function unit.hitChance(avoidBonus, tileAvoidBonus)
     local baseChance = 100
     return baseChance - (avoidBonus + tileAvoidBonus)
+end
+
+function unit.dead(character)
+    return character.health < 1
 end
