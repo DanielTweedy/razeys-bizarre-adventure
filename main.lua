@@ -8,9 +8,11 @@ Turn based top down strategy game where player controls units and fights enemy u
 require("protoMap")
 require("cursor")
 
-gameStateCursor = 1
-gameStateUnit = 2
-gameStateAI = 3
+local CURSOR_MOVE = 1
+local UNITS_MOVE = 2
+local AI_TURN = 3
+
+gameState = CURSOR_MOVE -- game state defaults to moving cursor around
 
 function love.load()
     love.window.setTitle("Razey's Bizarre Adventure")
@@ -26,13 +28,17 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-    if key == "up" then
-        cursor.move(0, -1)
-    elseif key == "down" then
-        cursor.move(0,1)
-    elseif key == "left" then
-        cursor.move(-1,0)
-    elseif key == "right" then
-        cursor.move(1, 0)
+    if gameState ~= AI_TURN then
+        if key == "up" then
+            cursor.move(0, -1)
+        elseif key == "down" then
+            cursor.move(0,1)
+        elseif key == "left" then
+            cursor.move(-1,0)
+        elseif key == "right" then
+            cursor.move(1, 0)
+        elseif key == "return" or key == "kpenter" then
+            print(map.getUnit(cursor.y, cursor.x))
+        end
     end
 end

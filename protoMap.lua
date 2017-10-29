@@ -1,6 +1,7 @@
-map = {}
 require("tile")
 require("unit")
+
+map = {}
 map.x = 10
 map.y = 10
 
@@ -17,12 +18,22 @@ map.Tiles = {{field, field, field, field, field, field, field, field, mountain, 
              {field, field, field, hill, field, field, field, mountain, cave, cave} ,
              {field, field, field, field, field, field, field, field, mountain, mountain}}
 
-map.Units = {}
+map.Units = {{nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
+             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil}}
+
 map.Units[razey.y][razey.x] = razey
-map.Units[calvaryman.y][calvaryman.x] = cavalryman
+map.Units[cavalryman.y][cavalryman.x] = cavalryman
 map.Units[archer.y][archer.x] = archer
 map.Units[swordsman.y][swordsman.x] = swordsman
-map.Units[m1.y][m1.x] m1
+map.Units[m1.y][m1.x] = m1
 map.Units[m2.y][m2.x] = m2
 map.Units[leader.y][leader.x] = leader
 
