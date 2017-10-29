@@ -32,7 +32,6 @@ function player.moveUnit(y, x)
 			x = x-player.selectedUnit.x
 			y = y-player.selectedUnit.y
 			map.moveUnit(y, x, player.selectedUnit)
-            player.selectedUnit = nil
 		end
     end
 end
