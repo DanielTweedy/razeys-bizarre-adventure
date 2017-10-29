@@ -7,6 +7,7 @@ Turn based top down strategy game where player controls units and fights enemy u
 ]]--
 require("protoMap")
 require("cursor")
+require("player")
 
 local CURSOR_MOVE = 1
 local UNITS_MOVE = 2
@@ -44,8 +45,11 @@ function love.keypressed(key)
 end
 
 function tileSelect()
-    --if(gameState == MOVE_CURSOR) then
-        local char = map.getUnit(cursor.y, cursor.x)
-        print(char == nil)
-    --end
+    if(gameState == CURSOR_MOVE) then
+        gameState = UNIT_MOVE
+        player.selectUnit(cursor.y, cursor.x)
+    elseif gameState == UNIT_MOVE then
+        gameState = CURSOR_MOVE
+        player.moveUnit(cursor.y, cursor.x)
+    end
 end

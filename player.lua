@@ -24,8 +24,8 @@ function player.moveUnit(y, x)
     if player.selectedUnit ~= nil then
         x = x-player.selectedUnit.x
         y = y-player.selectedUnit.y
-        map.moveUnit(y, x, selectedUnit)
-    end
+        map.moveUnit(y, x, player.selectedUnit)
+        end
 end
 
 function player.attackUnit(y, x)
