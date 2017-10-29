@@ -25,11 +25,11 @@ function enemy.ai()
 		end
 	end
 end
-function enemy.selectUnit(unit) 
-    if unit == nil then
+function enemy.selectUnit(u) 
+    if u == nil then
       --insert menu functionality here.
     else
-        enemy.selectedUnit = unit
+        enemy.selectedUnit = u
 		sound = love.audio.newSource(SE_PATH .. "true.wav", "static")
 		sound:play()		
     end
