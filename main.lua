@@ -44,10 +44,8 @@ function love.keypressed(key)
 end
 
 function tileSelect()
-    if(gameState == MOVE_CURSOR) then
-        local unit = getUnit(cursor.y, cursor.x)
-        if unit ~= nil then
-            print(unit.x)
-        end
-    end
+    --if(gameState == MOVE_CURSOR) then
+        local char = map.getUnit(cursor.y, cursor.x)
+        print(char == nil)
+    --end
 end
