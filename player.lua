@@ -38,10 +38,10 @@ function player.attackUnit(y, x)
     
       if abs >= selectedUnit.minRange and abs <= maxRange and selectedUnit.stamina >= 1 then
       selectedUnit.stamina = selectedUnit.stamina-1
-        if math.random(100) < 100-selectedUnit.avoid then
-        map.getUnit(y, x).health = map.getUnit(y, x).health - selectedUnit.strength + map.getUnit(y, x).defense
-            if map.getUnit(y, x).stamina >= 1 and math.random(100) < 100-selectedUnit.avoid then
-            selectedUnit.health = selectedUnit.health - map.getUnit(y, x) + selectedUnit.defense
+        if math.random(100) < 100 - map.getUnit(y, x).avoid - map.getTile(y, x).avoidBonus then
+        map.getUnit(y, x).health = map.getUnit(y, x).health - selectedUnit.strength + map.getUnit(y, x).defense + map.getTile(x, y).defenseBonus
+            if map.getUnit(y, x).stamina >= 1 and math.random(100) < 100 - selectedUnit.avoid - map.getTile(selectedUnit.y, selectedUnit.x).avoidBonus then
+            selectedUnit.health = selectedUnit.health - map.getUnit(y, x) + selectedUnit.defense + map.getTile(selectedUnit.y, selectedUnit.x).avoidBonus
             end
         end
       end

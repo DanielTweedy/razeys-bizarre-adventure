@@ -94,6 +94,20 @@ m2.maxRange = 2 -- maximum reach of weapon
 m2.stamina = 4
 
 
+leader = {}
+leader.x = 6 -- board units
+leader.y = 5 -- board units
+
+leader.health = 20 -- base health points
+leader.strength = 7 -- base damage  done
+leader.defense = 2 -- damage reduction
+leader.avoid = 15 -- how easy to hit 
+
+-- Some units can not attack when too close
+leader.minRange = 1 -- number of spaces away m2 can attack
+leader.maxRange = 2 -- maximum reach of weapon
+leader.stamina = 4
+
 
 unit = {}
 
