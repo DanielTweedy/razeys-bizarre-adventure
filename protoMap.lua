@@ -18,24 +18,15 @@ map.Tiles = {{field, field, field, field, field, field, field, field, mountain, 
              {field, field, field, hill, field, field, field, mountain, cave, cave} ,
              {field, field, field, field, field, field, field, field, mountain, mountain}}
 
-map.Units = {{nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil},
-             {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil}}
+map.Units = {}
 
-map.Units[razey.y][razey.x] = razey
-map.Units[cavalryman.y][cavalryman.x] = cavalryman
-map.Units[archer.y][archer.x] = archer
-map.Units[swordsman.y][swordsman.x] = swordsman
-map.Units[m1.y][m1.x] = m1
-map.Units[m2.y][m2.x] = m2
-map.Units[leader.y][leader.x] = leader
+map.Units[1] = razey
+map.Units[2] = cavalryman
+map.Units[3] = archer
+map.Units[4] = swordsman
+map.Units[5] = m1
+map.Units[6] = m2
+map.Units[7] = leader
 
 function map.getTile(yVal, xVal) 
   return map.tile[yVal][xVal]
@@ -66,5 +57,8 @@ function map.draw()
         for x=1, #map.Tiles[y] do
             tile.draw(map.Tiles[y][x], y, x)
         end
+    end
+    for i=1, #map.Units do
+        unit.draw(map.Units[i])
     end
 end

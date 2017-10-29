@@ -13,11 +13,12 @@ function player.new(o)
 end
 
 function player.selectUnit(y, x) 
+<<<<<<< HEAD
     if map.getUnit(y, x) == nil then
       --insert menu functionality here.
       else
         player.selectedUnit = map.getUnit(y, x)
-      end
+    end
 end
   
 function player.moveUnit(y, x) 

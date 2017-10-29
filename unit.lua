@@ -1,9 +1,10 @@
 
 local abs = math.abs
+ASSET_PATH = "Assets/characters/"
 
 razey = {}
-razey.x = 4 -- board razeys
-razey.y = 2 -- board razeys
+razey.x = 2 -- board razeys
+razey.y = 4 -- board razeys
 
 razey.health = 20 -- base health points
 razey.strength = 7 -- base damage  done
@@ -15,11 +16,11 @@ razey.minRange = 1 -- number of spaces away a razey can attack
 razey.maxRange = 2 -- maximum reach of razey's weapon
 
 razey.stamina = 4
---razey.contoller = player
+razey.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 cavalryman = {}
-cavalryman.x = 3 -- board razeys
-cavalryman.y = 5 -- board razeys
+cavalryman.x = 5 -- board razeys
+cavalryman.y = 3 -- board razeys
 
 cavalryman.health = 20 -- base health points
 cavalryman.strength = 7 -- base damage  done
@@ -31,6 +32,7 @@ cavalryman.minRange = 1 -- number of spaces away a razey can attack
 cavalryman.maxRange = 2 -- maximum reach of razey's weapon
 
 cavalryman.stamina = 4
+cavalryman.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 archer = {}
 archer.x = 1 -- board razeys
@@ -46,6 +48,7 @@ archer.minRange = 1 -- number of spaces away a razey can attack
 archer.maxRange = 2 -- maximum reach of razey's weapon
 
 archer.stamina = 4
+archer.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 swordsman = {}
 swordsman.x = 3 -- board razeys
@@ -61,6 +64,7 @@ swordsman.minRange = 1 -- number of spaces away archer can attack
 swordsman.maxRange = 2 -- maximum reach of weapon
 
 swordsman.stamina = 4
+swordsman.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 
 m1 = {}
@@ -76,6 +80,7 @@ m1.avoid = 15 -- how easy to hit
 m1.minRange = 1 -- number of spaces away m1 can attack
 m1.maxRange = 2 -- maximum reach of weapon
 m1.stamina = 4
+m1.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 m2 = {}
 m2.x = 5 -- board units
@@ -90,6 +95,7 @@ m2.avoid = 15 -- how easy to hit
 m2.minRange = 1 -- number of spaces away m2 can attack
 m2.maxRange = 2 -- maximum reach of weapon
 m2.stamina = 4
+m2.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 
 leader = {}
@@ -105,6 +111,7 @@ leader.avoid = 15 -- how easy to hit
 leader.minRange = 1 -- number of spaces away m2 can attack
 leader.maxRange = 2 -- maximum reach of weapon
 leader.stamina = 4
+leader.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
 
 unit = {}
@@ -116,4 +123,9 @@ function unit.move(character, dx, dy)
         character.y = character.y + dy
         character.stamina = character.stamina - totalDistance
     end
+end
+
+function unit.draw(character)
+    local TILE_SIZE = 32
+    love.graphics.draw(character.sprite, TILE_SIZE * character.y, TILE_SIZE * character.x)
 end
