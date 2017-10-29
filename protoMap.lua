@@ -82,3 +82,12 @@ function map.draw()
         unit.draw(map.Units[i])
     end
 end
+
+function map.update(dt)
+    for i=1, #map.Units do
+        local curUnit = map.Units[i]
+        if unit.dead(curUnit) then
+            table.remove(map.Units, i)
+        end
+    end
+end

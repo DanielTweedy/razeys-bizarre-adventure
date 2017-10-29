@@ -159,3 +159,7 @@ function unit.hitChance(avoidBonus, tileAvoidBonus)
     local baseChance = 100
     return baseChance - (avoidBonus + tileAvoidBonus)
 end
+
+function unit.dead(character)
+    return character.health < 1
+end

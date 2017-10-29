@@ -36,9 +36,14 @@ function love.update(dt)
     if(gameState == AI_TURN) then
         -- TODO
     end
+
+    --map.update(dt)
 end
 
 function love.keypressed(key)
+    if key == "escape" then
+        love.event.quit()
+    end
     if gameState ~= AI_TURN then
         if key == "up" then
             cursor.move(0, -1)
