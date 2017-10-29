@@ -4,6 +4,7 @@ require("unit")
 player = {}
 player.units = {}
 player.selectedUnit = nil
+local TILE_SIZE = 32 -- 32x32 tiles
 function player.new(o) 
   o = o or {}
   setmetatable(o, self)
@@ -61,5 +62,15 @@ function player.attackUnit(y, x)
         end
       end
   end 
+end
 
+function player.drawRange()
+	for y=0, player.selectedUnit.stamina do
+		for x=0, player.selectedUnit.stamina-y do
+			love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+			love.graphics.rectangle("line",(player.selectedUnit.x+x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+			love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+			love.graphics.rectangle("line",(player.selectedUnit.x-x)*TILE_SIZE,(player.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+		end
+	end
 end
