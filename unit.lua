@@ -138,3 +138,16 @@ function unit.draw(character)
         love.graphics.draw(character.sprite, TILE_SIZE * character.x, TILE_SIZE * character.y)
     end
 end
+
+function unit.inRange(character, distance)
+    return distance >= character.minRange and distance <= character.maxRange
+end
+
+function unit.canFight(character)
+    return character.stamina > 0
+end
+
+function unit.hitChance(avoidBonus, tileAvoidBonus)
+    local baseChance = 100
+    return baseChance - (avoidBonus + tileAvoidBonus)
+end

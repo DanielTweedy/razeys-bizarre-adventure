@@ -31,29 +31,31 @@ function player.moveUnit(y, x)
 			x = x-player.selectedUnit.x
 			y = y-player.selectedUnit.y
 			map.moveUnit(y, x, player.selectedUnit)
+            player.selectedUnit = nil
 		end
     end
 end
 
 function player.attackUnit(y, x)
-  if map.getUnit(y, x) ~= nil and player.selectedUnit ~= nil then
-    dx = x - player.selectedUnit.x
-    dy = y - player.selectedUnit.y
-    local abs = math.abs(dx) + math.abs(dy)
+    local attacker = player.selectedUnit
+    local defenderTile = map.getTile(y,x)
+    local defender = map.getUnit(y,x)
     
-      if abs >= player.selectedUnit.minRange and abs <= player.selectedUnit.maxRange and player.selectedUnit.stamina >= 1 then
-      player.selectedUnit.stamina = player.selectedUnit.stamina-1
-        if math.random(100) < 100 - map.getUnit(y, x).avoid - map.getTile(y, x).avoidBonus then
-       temp = map.getUnit(y, x).health - player.selectedUnit.strength + map.getUnit(y, x).defense + map.getTile(x, y).defenseBonus
-       if (temp < 0) then
-          else
-          map.getUnit(y, x).health = temp;
-      end
-            if map.getUnit(y, x).stamina >= 1 and math.random(100) < 100 - player.selectedUnit.avoid - map.getTile(player.selectedUnit.y, player.selectedUnit.x).avoidBonus then
-            temp = player.selectedUnit.health - map.getUnit(y, x).strength + player.selectedUnit.defense + map.getTile(player.selectedUnit.y, player.selectedUnit.x).avoidBonus
+  if defender ~= nil and player.attackerUnit ~= nil then
+    local dx = x - attacker.x
+    local dy = y - attacker.y
+    local dist = math.abs(dx) + math.abs(dy)
+    
+    if unit.inRange(attacker, dist) and unit.canFight(attacker) then
+        attacker.stamina = attacker.stamina-1
+        if math.random(100) < unit.hitChance(defender.avoid,defenderTile.avoidBonus) then
+            local dmg = attacker.strength - defender.defense - defenderTile.defenseBonus
+            if (dmg > 0) then defender.health = defender.health - dmg; end
+        if unit.canFight(defender) and math.random(100) < unit.hitChance(attacker.avoid,map.getTile(attacker.y, attacker.x).avoidBonus) then
+            temp = attacker.health - defender.strength + attacker.defense + map.getTile(attacker.y, attacker.x).avoidBonus
                if (temp < 0) then
                 else
-                player.selectedUnit.health = temp;
+                attacker.health = temp;
               end
             end
         end
