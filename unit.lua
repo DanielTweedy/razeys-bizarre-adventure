@@ -112,7 +112,7 @@ leader.y = 5 -- board units
 leader.health = 23 -- base health points
 leader.strength = 0 -- base damage  done
 leader.defense = 1 -- damage reduction
-leader.avoid = 20 -- how easy to hit 
+leader.avoid = 80 -- how easy to hit 
 
 -- Some units can not attack when too close
 leader.minRange = 1 -- number of spaces away m2 can attack

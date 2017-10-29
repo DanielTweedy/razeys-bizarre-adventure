@@ -33,7 +33,9 @@ function love.draw()
 end
 
 function love.update(dt)
-
+    if(gameState == AI_TURN) then
+        -- TODO
+    end
 end
 
 function love.keypressed(key)
@@ -46,11 +48,14 @@ function love.keypressed(key)
             cursor.move(-1,0)
         elseif key == "right" then
             cursor.move(1, 0)
-        elseif key == "return" or key == "kpenter" then
+        elseif key == "return" or key == "kpenter" or key == "space" then
             tileSelect()
-          elseif key == "c" then
+        elseif key == "c" then
             gameState = CURSOR_MOVE
             player.selectedUnit = nil
+        -- End turn
+        elseif key == "e" then
+            gameState = AI_TURN
         end
     end
 end
