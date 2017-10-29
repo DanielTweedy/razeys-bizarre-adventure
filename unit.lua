@@ -1,7 +1,7 @@
 
 local abs = math.abs
 ASSET_PATH = "Assets/characters/"
-
+SE_PATH = "Assets/SE/"
 razey = {}
 razey.x = 2 -- board razeys
 razey.y = 4 -- board razeys
@@ -122,6 +122,11 @@ function unit.move(character, dx, dy)
         character.x = character.x + dx
         character.y = character.y + dy
         character.stamina = character.stamina - totalDistance
+		sound = love.audio.newSource(SE_PATH .. "move.wav","static")
+		sound:play()		
+	else
+		sound = love.audio.newSource(SE_PATH .. "cannot.wav", "static")
+		sound:play()		
     end
 end
 

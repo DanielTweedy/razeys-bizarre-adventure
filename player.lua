@@ -4,7 +4,6 @@ require("unit")
 player = {}
 player.units = {}
 player.selectedUnit = nil
-
 function player.new(o) 
   o = o or {}
   setmetatable(o, self)
@@ -15,16 +14,24 @@ end
 function player.selectUnit(y, x) 
     if map.getUnit(y, x) == nil then
       --insert menu functionality here.
-      else
+    else
         player.selectedUnit = map.getUnit(y, x)
+		sound = love.audio.newSource(SE_PATH .. "true.wav", "static")
+		sound:play()		
     end
 end
   
 function player.moveUnit(y, x) 
     if player.selectedUnit ~= nil then
-        x = x-player.selectedUnit.x
-        y = y-player.selectedUnit.y
-        map.moveUnit(y, x, player.selectedUnit)
+		if player.selectedUnit.stamina == 0 then
+			player.selectedUnit = nil
+			sound = love.audio.newSource(SE_PATH .. "return.wav", "static")
+			sound:play()
+		else
+			x = x-player.selectedUnit.x
+			y = y-player.selectedUnit.y
+			map.moveUnit(y, x, player.selectedUnit)
+		end
     end
 end
 
