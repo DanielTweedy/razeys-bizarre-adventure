@@ -3,7 +3,7 @@ require("unit")
 
 player = {}
 player.units = {}
-player.selectedUnit = {}
+player.selectedUnit = nil
 
 function player.new(o) 
   o = o or {}
@@ -25,7 +25,7 @@ function player.moveUnit(y, x)
         x = x-player.selectedUnit.x
         y = y-player.selectedUnit.y
         map.moveUnit(y, x, player.selectedUnit)
-        end
+    end
 end
 
 function player.attackUnit(y, x)

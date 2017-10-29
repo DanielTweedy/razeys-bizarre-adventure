@@ -23,7 +23,12 @@ end
 function love.draw()
     map.draw()
     cursor.draw()
-	ui.draw(map.getTile(cursor.y, cursor.x), map.getUnit(cursor.y, cursor.x))
+	ui.drawTileInfo(map.getTile(cursor.y, cursor.x))
+	if(player.selectedUnit ~= nil) then
+		ui.drawUnitInfo(player.selectedUnit)
+	elseif(map.getUnit(cursor.y, cursor.x) ~= nil) then
+		ui.drawUnitInfo(map.getUnit(cursor.y, cursor.x))
+	end
 end
 
 function love.update(dt)
