@@ -44,3 +44,4 @@ mountain.defenseBonus = 2
 mountain.avoidBonus = 10
 mountain.staminaCost = 10
 mountain.sprite = love.graphics.newImage(TILE_PATH .. "tile_mountain_0.png")
+

@@ -7,16 +7,27 @@ map.y = 10
 
 
 
-map.Tiles = {{field, field, field, field, field, field, field, field, mountain, mountain} ,
-             {field, field, field, forest, field, field, field, mountain, cave, cave} ,
-             {field, field, field, field, field, field, mountain, cave, cave, cave} ,
-             {field, field, forest, field, forest, mountain, cave, cave, cave, cave} ,
+map.Under = {{field, field, field, field, field, field, field, field, field, field} ,
+             {field, field, field, field, field, field, field, field, cave, cave} ,
+             {field, field, field, field, field, field, field, cave, cave, cave} ,
+             {field, field, field, field, field, field, cave, cave, cave, cave} ,
              {field, field, field, field, field, cave, cave, cave, cave, cave} ,
              {field, field, field, field, field, cave, cave, cave, cave, cave} ,
-             {field, field, hill, field, field, mountain, cave, cave, cave, cave} ,
-             {field, field, field, field, field, field, mountain, cave, cave, cave} ,
-             {field, field, field, hill, field, field, field, mountain, cave, cave} ,
-             {field, field, field, field, field, field, field, field, mountain, mountain}}
+             {field, field, field, field, field, field, cave, cave, cave, cave} ,
+             {field, field, field, field, field, field, field, cave, cave, cave} ,
+             {field, field, field, field, field, field, field, field, cave, cave} ,
+             {field, field, field, field, field, field, field, field, field, field}}
+			 
+map.Upper = {{nil, nil, nil, nil, nil, nil, nil, nil, mountain, mountain} ,
+             {nil, nil, nil, forest, nil, nil, nil, mountain, nil, nil} ,
+             {nil, nil, nil, nil, nil, nil, mountain, nil, nil, nil} ,
+             {nil, nil, forest, nil, forest, mountain, nil, nil, nil, nil} ,
+             {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil} ,
+             {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil} ,
+             {nil, nil, hill, nil, nil, mountain, nil, nil, nil, nil} ,
+             {nil, nil, nil, nil, nil, nil, mountain, nil, nil, nil} ,
+             {nil, nil, nil, hill, nil, nil, nil, mountain, nil, nil} ,
+             {nil, nil, nil, nil, nil, nil, nil, nil, mountain, mountain}}
 
 map.Units = {}
 
@@ -29,7 +40,11 @@ map.Units[6] = m2
 map.Units[7] = leader
 
 function map.getTile(yVal, xVal) 
-  return map.Tiles[yVal][xVal]
+  if(map.Upper[yVal][xVal] ~= nil) then
+    return map.Upper[yVal][xVal]
+  else
+    return map.Under[yVal][xVal]
+  end
 end
 
 function map.getUnit(yVal, xVal)
@@ -47,7 +62,7 @@ function map.setUnit(yVal, xVal, cunit)
 end
 
 function map.setTile(yVal, xVal, tile)
-  map.Tiles[yVal][xVal] = tile
+  map.Upper[yVal][xVal] = tile
 end
 
 function map.moveUnit(dy, dx, cunit)
@@ -55,9 +70,16 @@ function map.moveUnit(dy, dx, cunit)
 end
 
 function map.draw()
-    for y=1, #map.Tiles do
-        for x=1, #map.Tiles[y] do
-            tile.draw(map.Tiles[y][x], y, x)
+    for y=1, #map.Under do
+        for x=1, #map.Under[y] do
+            tile.draw(map.Under[y][x], y, x)
+        end
+    end
+    for y=1, #map.Upper do
+        for x=1, #map.Upper[y] do
+			if(map.Upper[y][x] ~= nil) then
+				tile.draw(map.Upper[y][x], y, x)
+			end
         end
     end
     for i=1, #map.Units do

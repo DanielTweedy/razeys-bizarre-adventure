@@ -8,6 +8,7 @@ Turn based top down strategy game where player controls units and fights enemy u
 require("protoMap")
 require("cursor")
 require("player")
+require("ui")
 
 local CURSOR_MOVE = 1
 local UNITS_MOVE = 2
@@ -22,6 +23,7 @@ end
 function love.draw()
     map.draw()
     cursor.draw()
+	ui.draw(map.getTile(cursor.y, cursor.x), map.getUnit(cursor.y, cursor.x))
 end
 
 function love.update(dt)
