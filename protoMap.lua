@@ -47,6 +47,11 @@ function map.getTile(yVal, xVal)
   end
 end
 
+function map.refreshStamina()
+	for i = 1, #map.Units do
+		map.Units[i].stamina = map.Units[i].maxStamina
+	end
+end
 function map.getUnit(yVal, xVal)
   local i
   for i=1, #map.Units do
@@ -66,6 +71,8 @@ function map.setTile(yVal, xVal, tile)
 end
 
 function map.moveUnit(dy, dx, cunit)
+    print(cunit == nil)
+    print(unit.move == nil)
   unit.move(cunit, dx, dy)
 end
 
@@ -80,5 +87,14 @@ function map.draw()
     end
     for i=1, #map.Units do
         unit.draw(map.Units[i])
+    end
+end
+
+function map.update(dt)
+    for i=1, #map.Units do
+        local curUnit = map.Units[i]
+        if unit.dead(curUnit) then
+            table.remove(map.Units, i)
+        end
     end
 end

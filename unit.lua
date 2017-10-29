@@ -17,6 +17,7 @@ razey.minRange = 1 -- number of spaces away a razey can attack
 razey.maxRange = 2 -- maximum reach of razey's weapon
 
 razey.stamina = 100
+razey.maxStamina = 100
 razey.player = true
 razey.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Razey0.png")
 
@@ -34,6 +35,7 @@ cavalryman.minRange = 1 -- number of spaces away a razey can attack
 cavalryman.maxRange = 1 -- maximum reach of razey's weapon
 
 cavalryman.stamina = 5
+cavalryman.maxStamina = 5
 cavalryman.player = true
 cavalryman.sprite = love.graphics.newImage(ASSET_PATH .. "Horseman.png")
 
@@ -51,8 +53,9 @@ archer.minRange = 2 -- number of spaces away a razey can attack
 archer.maxRange = 3 -- maximum reach of razey's weapon
 
 archer.stamina = 4
+archer.maxStamina = 4
 archer.player = true
-archer.sprite = love.graphics.newImage(ASSET_PATH .. "Archer.png")
+archer.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Archer00.png")
 
 swordsman = {}
 swordsman.x = 3 -- board razeys
@@ -68,8 +71,9 @@ swordsman.minRange = 1 -- number of spaces away archer can attack
 swordsman.maxRange = 1 -- maximum reach of weapon
 
 swordsman.stamina = 4
+swordsman.maxStamina = 4
 swordsman.player = true
-swordsman.sprite = love.graphics.newImage(ASSET_PATH .. "Swordman.png")
+swordsman.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_Swordman00.png")
 
 
 m1 = {}
@@ -85,6 +89,7 @@ m1.avoid = 5 -- how easy to hit
 m1.minRange = 1 -- number of spaces away m1 can attack
 m1.maxRange = 1 -- maximum reach of weapon
 m1.stamina = 5
+m1.maxStamina = 5
 m1.player = false
 m1.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_TreeMonster00.png")
 
@@ -101,6 +106,7 @@ m2.avoid = 5 -- how easy to hit
 m2.minRange = 1 -- number of spaces away m2 can attack
 m2.maxRange = 1 -- maximum reach of weapon
 m2.stamina = 5
+m2.maxStamina = 5
 m2.player = false
 m2.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_TreeMonster00.png")
 
@@ -118,6 +124,7 @@ leader.avoid = 80 -- how easy to hit
 leader.minRange = 1 -- number of spaces away m2 can attack
 leader.maxRange = 2 -- maximum reach of weapon
 leader.stamina = 4
+leader.maxStamina = 4
 leader.player = false
 leader.sprite = love.graphics.newImage(ASSET_PATH .. "sprite_MLeader0.png")
 
@@ -158,4 +165,8 @@ end
 function unit.hitChance(avoidBonus, tileAvoidBonus)
     local baseChance = 100
     return baseChance - (avoidBonus + tileAvoidBonus)
+end
+
+function unit.dead(character)
+    return character.health < 1
 end
