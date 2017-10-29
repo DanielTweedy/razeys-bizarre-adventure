@@ -43,4 +43,4 @@ cave.sprite = love.graphics.newImage(TILE_PATH .. "tile_cave_00.png")
 mountain.defenseBonus = 2
 mountain.avoidBonus = 10
 mountain.staminaCost = 10
-mountain.sprite = love.graphics.newImage(TILE_PATH .. "tile_land_2.png")
+mountain.sprite = love.graphics.newImage(TILE_PATH .. "tile_mountain_0.png")

@@ -33,19 +33,18 @@ function player.moveUnit(y, x)
 end
 
 function player.attackUnit(y, x)
-  if map.getUnit(y, x) ~= nil then
+  if map.getUnit(y, x) ~= nil and selectedUnit ~= nil then
     local abs = math.abs(dx) + math.abs(dy)
     
       if abs >= selectedUnit.minRange and abs <= maxRange and selectedUnit.stamina >= 1 then
-        selectedUnit.stamina = selectedUnit.stamina-1
+      selectedUnit.stamina = selectedUnit.stamina-1
         if math.random(100) < 100-selectedUnit.avoid then
-                map.getUnit(y, x).health = map.getUnit(y, x).health - selectedUnit.strength + map.getUnit(y, x).defense
-                if map.getUnit(y, x).stamina >= 1 and math.random(100) < 100-selectedUnit.avoid then
-                selectedUnit.health = selectedUnit.health - map.getUnit(y, x) + selectedUnit.defense
-                end
-          end
-
-    end
-  end
+        map.getUnit(y, x).health = map.getUnit(y, x).health - selectedUnit.strength + map.getUnit(y, x).defense
+            if map.getUnit(y, x).stamina >= 1 and math.random(100) < 100-selectedUnit.avoid then
+            selectedUnit.health = selectedUnit.health - map.getUnit(y, x) + selectedUnit.defense
+            end
+        end
+      end
+  end 
 
 end
