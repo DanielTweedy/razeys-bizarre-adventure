@@ -33,7 +33,12 @@ function map.getTile(yVal, xVal)
 end
 
 function map.getUnit(yVal, xVal)
-  return map.Units[yVal][xVal]
+  local i
+  for i=1, #map.Units do
+    if yVal == map.Units[i].y and xVal == map.Units[i].x then
+      return map.Units[i];
+    end
+  end
 end
 
 function map.setUnit(yVal, xVal, cunit)
