@@ -31,6 +31,9 @@ function love.draw()
 	elseif(map.getUnit(cursor.y, cursor.x) ~= nil) then
 		ui.drawUnitInfo(map.getUnit(cursor.y, cursor.x))
 	end
+	if(enemy.selectedUnit~= nil) then
+		enemy.drawRange()
+	end
 end
 
 function love.update(dt)

@@ -18,9 +18,7 @@ function enemy.ai()
 		if(map.Units[i].player == false) then
 			if(unit~=nil) then
 				enemy.selectUnit(map.Units[i])
-				--love.timer.sleep(TIME_WAIT)
 				enemy.findClosest()
-				--love.timer.sleep(TIME_WAIT)
 			end
 		end
 	end
@@ -86,40 +84,58 @@ function enemy.findClosest()
 	closest = nil
 	minimum = 100
 	for u=1, #map.Units do
-		if(unit~=map.Units[u] and map.Units[u].player==false and (math.abs(unit.x - map.Units[u].x)+math.abs(unit.y-map.Units[u].y))<=minimum) then
+		if(unit~=map.Units[u] and map.Units[u].player==true and (math.abs(unit.x - map.Units[u].x)+math.abs(unit.y-map.Units[u].y))<=minimum) then
 			minimum = math.abs(unit.x - map.Units[u].x)+math.abs(unit.y-map.Units[u].y)
 			closest = map.Units[u]
 		end
 	end
+	targetX = 0
+	targetY = 0
 	if(unit.x < closest.x) then
 		if(unit.x + unit.stamina >= closest.x) then
-			enemy.moveUnit(unit.y, closest.x)
+			if(unit.y ~= closest.y) then
+				enemy.moveUnit(unit.y, closest.x)
+			else
+				enemy.moveUnit(unit.y, closest.x - 1)
+			end
 		else
-			enemy.moveUnit(unit.y, unit.x+stamina)
+			enemy.moveUnit(unit.y, unit.x+unit.stamina)
 		end
 	else
 		if(unit.x - unit.stamina <= closest.x) then
-			enemy.moveUnit(unit.y, closest.x)
+			if(unit.y ~= closest.y) then
+				enemy.moveUnit(unit.y, closest.x)
+			else
+				enemy.moveUnit(unit.y, closest.x + 1)
+			end
 		else
-			enemy.moveUnit(unit.y, unit.x-stamina)
+			enemy.moveUnit(unit.y, unit.x-unit.stamina)
 		end
 	end
 	if(unit.y < closest.y) then
 		if(unit.y + unit.stamina >= closest.y) then
-			enemy.moveUnit(closest.y, unit.x)
+			if(unit.x ~= closest.x) then
+				enemy.moveUnit(closest.y, unit.x)
+			else
+				enemy.moveUnit(closest.y - 1, unit.x)
+			end
 		else
-			enemy.moveUnit(closest.y+stamina, unit.x)
+			enemy.moveUnit(closest.y+unit.stamina, unit.x)
 		end
 	else
-		if(unit.x - unit.stamina <= closest.x) then
-			enemy.moveUnit(closest.y, unit.x)
+		if(unit.y - unit.stamina <= closest.y) then
+			if(unit.x ~= closest.x) then
+				enemy.moveUnit(closest.y, unit.x)
+			else
+				enemy.moveUnit(closest.y + 1, unit.x)
+			end
 		else
-			enemy.moveUnit(closest.y-stamina, unit.x)
+			enemy.moveUnit(closest.y-unit.stamina, unit.x)
 		end
 	end
-	--love.timer.sleep(TIME_WAIT)
 	enemy.attackUnit(closest.y,closest.x)
 end			
+
 function enemy.drawRange()
 	for y=0, enemy.selectedUnit.stamina do
 		for x=0, enemy.selectedUnit.stamina-y do
