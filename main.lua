@@ -10,9 +10,9 @@ require("cursor")
 require("player")
 require("ui")
 require("enemy")
-local CURSOR_MOVE = 1
-local UNITS_MOVE = 2
-local AI_TURN = 3
+CURSOR_MOVE = 1
+UNITS_MOVE = 2
+AI_TURN = 3
 
 gameState = CURSOR_MOVE -- game state defaults to moving cursor around
 
@@ -38,10 +38,7 @@ end
 
 function love.update(dt)
     if(gameState == AI_TURN) then
-        -- TODO
 		enemy.ai()
-		gameState = CURSOR_MOVE
-		map.refreshStamina()
     end
 
     --map.update(dt)
@@ -67,6 +64,7 @@ function love.keypressed(key)
             player.selectedUnit = nil
         -- End turn
         elseif key == "e" then
+			player.selectedUnit = nil
             gameState = AI_TURN
 			
         end

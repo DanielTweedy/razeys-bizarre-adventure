@@ -1,11 +1,12 @@
 require("protoMap")
 require("unit")
-
 enemy = {}
 enemy.units = {}
 enemy.selectedUnit = nil
+enemy.index = 1
+enemy.moving = false
 local TILE_SIZE = 32 -- 32x32 tiles
-local TIME_WAIT = 1
+local waitTime = nil
 function enemy.new(o) 
   o = o or {}
   setmetatable(o, self)
@@ -14,13 +15,34 @@ function enemy.new(o)
 end
 
 function enemy.ai()
-	for i = 1, #map.Units do
-		if(map.Units[i].player == false) then
-			if(unit~=nil) then
-				enemy.selectUnit(map.Units[i])
-				enemy.findClosest()
+	if(enemy.index > #map.Units) then
+		enemy.index = 1
+		gameState = CURSOR_MOVE
+	elseif(map.Units[enemy.index].player == false) then
+		--select a new unit and start moving if enemy isn't moving
+		if(enemy.moving == false) then
+			-- wait a second and then select new unit
+			enemy.waiting(1)
+			if(waitTime~=nil) then
+				return
 			end
+			enemy.selectUnit(map.Units[enemy.index])
+			enemy.moving = true
 		end
+		--if a unit selected and enemy is moving
+		if(enemy.selectUnit ~= nil and enemy.moving == true) then
+			-- wait a second and then move
+			enemy.waiting(1)
+			if(waitTime~=nil) then
+				return
+			end
+			enemy.findClosest()
+			enemy.selectedUnit = nil
+			enemy.moving = false
+			enemy.index = enemy.index + 1
+		end
+	else
+		enemy.index = enemy.index + 1
 	end
 end
 function enemy.selectUnit(u) 
@@ -42,8 +64,6 @@ function enemy.moveUnit(y, x)
 		else
 			x = x-enemy.selectedUnit.x
 			y = y-enemy.selectedUnit.y
-            print(x .. " " .. y)
-            print(enemy.selectedUnit == nil)
 			map.moveUnit(y, x, enemy.selectedUnit)
             enemy.selectedUnit = nil
 		end
@@ -136,13 +156,59 @@ function enemy.findClosest()
 	enemy.attackUnit(closest.y,closest.x)
 end			
 
+function enemy.waiting(t)
+	if(waitTime==nil) then
+		waitTime = 0
+	elseif(waitTime>=t) then
+		waitTime = nil
+	else
+		waitTime = waitTime + love.timer.getDelta()
+	end
+end
 function enemy.drawRange()
-	for y=0, enemy.selectedUnit.stamina do
-		for x=0, enemy.selectedUnit.stamina-y do
-			love.graphics.rectangle("line",(enemy.selectedUnit.x+x)*TILE_SIZE,(enemy.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
-			love.graphics.rectangle("line",(enemy.selectedUnit.x+x)*TILE_SIZE,(enemy.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
-			love.graphics.rectangle("line",(enemy.selectedUnit.x-x)*TILE_SIZE,(enemy.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
-			love.graphics.rectangle("line",(enemy.selectedUnit.x-x)*TILE_SIZE,(enemy.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+	for y=0, enemy.selectedUnit.stamina+enemy.selectedUnit.maxRange do
+		for x=0, enemy.selectedUnit.stamina-y+enemy.selectedUnit.maxRange do
+            if (enemy.selectedUnit.x+x < 11 and enemy.selectedUnit.y+y < 11) then
+              
+              if (x > enemy.selectedUnit.stamina-y-enemy.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(enemy.selectedUnit.x+x)*TILE_SIZE,(enemy.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else
+              love.graphics.rectangle("line",(enemy.selectedUnit.x+x)*TILE_SIZE,(enemy.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+			
+          end if (enemy.selectedUnit.x+x < 11 and enemy.selectedUnit.y-y >= 1) then
+            
+            if (x > enemy.selectedUnit.stamina-y-enemy.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(enemy.selectedUnit.x+x)*TILE_SIZE,(enemy.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else
+              love.graphics.rectangle("line",(enemy.selectedUnit.x+x)*TILE_SIZE,(enemy.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+      
+          end if (enemy.selectedUnit.x-x >= 1 and enemy.selectedUnit.y+y < 11) then
+            
+            if (x > enemy.selectedUnit.stamina-y-enemy.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(enemy.selectedUnit.x-x)*TILE_SIZE,(enemy.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else 
+              love.graphics.rectangle("line",(enemy.selectedUnit.x-x)*TILE_SIZE,(enemy.selectedUnit.y+y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+      
+          end if (enemy.selectedUnit.x-x >= 1 and enemy.selectedUnit.y-y >= 1) then
+            
+            if(x > enemy.selectedUnit.stamina-y-enemy.selectedUnit.minRange+1) then
+                love.graphics.setColor(255, 50, 50, 50)
+                love.graphics.rectangle("fill",(enemy.selectedUnit.x-x)*TILE_SIZE,(enemy.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+                love.graphics.setColor(255, 255, 255)
+              else
+              love.graphics.rectangle("line",(enemy.selectedUnit.x-x)*TILE_SIZE,(enemy.selectedUnit.y-y)*TILE_SIZE,TILE_SIZE,TILE_SIZE)
+              end
+      
+          end
 		end
 	end
 end
